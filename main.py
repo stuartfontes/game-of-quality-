@@ -1,6 +1,7 @@
 import pygame
 
 from src.core import settings
+from src.core.input_manager import InputManager
 from src.core.screen_manager import ScreenManager
 from src.screens.test_screens import TestScreen
 
@@ -17,7 +18,8 @@ def main():
     pygame.display.set_caption(settings.WINDOW_TITLE)
     pygame.mouse.set_visible(False)
 
-    manager = ScreenManager()
+    inputs = InputManager()
+    manager = ScreenManager(inputs)
     manager.register("a", TestScreen(manager, (30, 60, 120), "Tela A - Enter para ir à B", "b"))
     manager.register("b", TestScreen(manager, (100, 40, 60), "Tela B - Enter para ir à A", "a"))
     manager.go_to("a")
@@ -27,13 +29,15 @@ def main():
     while manager.running:
         dt = clock.tick(settings.FPS) / 1000
 
+        inputs.begin_frame(dt)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 manager.quit()
-            elif event.type == pygame.KEYDOWN and event.key in settings.KEYMAP["quit"]:
-                manager.quit()
-            else:
-                manager.handle_event(event)
+            inputs.process(event)
+            manager.handle_event(event)
+
+        if inputs.pressed("quit"):
+            manager.quit()
 
         manager.update(dt)
         manager.draw(screen)

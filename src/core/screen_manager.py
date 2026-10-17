@@ -1,5 +1,6 @@
 class ScreenManager:
-    def __init__(self):
+    def __init__(self, input_manager):
+        self.input = input_manager
         self._screens = {}
         self.current = None
         self.running = True
