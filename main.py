@@ -4,6 +4,7 @@ from src.core import settings
 from src.core.input_manager import InputManager
 from src.core.screen_manager import ScreenManager
 from src.screens.test_screens import TestScreen
+from src.core.assets import Assets
 
 
 def main():
@@ -19,7 +20,8 @@ def main():
     pygame.mouse.set_visible(False)
 
     inputs = InputManager()
-    manager = ScreenManager(inputs)
+    assets = Assets()
+    manager = ScreenManager(inputs, assets)
     manager.register("a", TestScreen(manager, (30, 60, 120), "Tela A - Enter para ir à B", "b"))
     manager.register("b", TestScreen(manager, (100, 40, 60), "Tela B - Enter para ir à A", "a"))
     manager.go_to("a")

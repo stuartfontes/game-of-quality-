@@ -6,7 +6,7 @@ INTERNAL_WIDTH = 384
 INTERNAL_HEIGHT = 216
 TILE_SIZE = 24
 FPS = 60
-WINDOW_TITLE = "Semana da qualidade - TEUTO / Por: Mauricio Stuart e toda UPP-1 "
+WINDOW_TITLE = "as aventuras do CLT - Episódio 1: Enfrente a CAM / Por: Mauricio Stuart e toda UPP-1 "
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 
@@ -34,7 +34,7 @@ KEYMAP = {
     "down":[pygame.K_DOWN, pygame.K_s],
     "left":[pygame.K_LEFT, pygame.K_a],
     "right":[pygame.K_RIGHT, pygame.K_d],
-    "confirm":[pygame.K_RETURN, pygame.K_SPACE],
+    "confirm":[pygame.K_RETURN],
     "back":[pygame.K_BACKSPACE],
     "jump":[pygame.K_SPACE, pygame.K_UP],
     "interact":[pygame.K_e],

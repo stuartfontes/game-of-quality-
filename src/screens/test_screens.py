@@ -37,4 +37,7 @@ class TestScreen(Screen):
         idle = self.font.render(
             f"Sem tecla há {self.manager.input.idle_time:.1f} s", False, settings.COLOR_TEXT
         )
-        surface.blit(idle, (20, 110))
+        surface.blit(self.manager.assets.image("sprites", "player.png"), (20, 150))
+        pixel_font = self.manager.assets.font("pixel.ttf", 16)
+        surface.blit(pixel_font.render("Fonte teste", False, settings.COLOR_TEXT), (80, 155))
+        
