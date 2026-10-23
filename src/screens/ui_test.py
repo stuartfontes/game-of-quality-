@@ -38,4 +38,3 @@ class UITestScreen(Screen):
         draw_text(surface, "Teste de interface", self.font, settings.COLOR_TEXT, (30, 15))
         self.menu.draw(surface)
         self.box.draw(surface)
-        

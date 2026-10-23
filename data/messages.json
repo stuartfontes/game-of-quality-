@@ -1,0 +1,9 @@
+{
+    "attempt_lost": [
+        "O controle em processo salvou no momento! Tome cuidado",
+        "A garantia da qualidade salvou desta vez! Redobre o cuidado",
+        "Infelizmente o produto foi para o mercado! :("
+    ],
+    "victory": "Um bom produto foi produzido, parabéns!",
+    "voucher": "Você ganhou um voucher para a roleta, aproveite!"
+}
