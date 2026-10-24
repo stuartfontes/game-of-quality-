@@ -1,6 +1,8 @@
 import json
+import time
+from datetime import datetime
 
-from src.core import settings
+from src.core import settings, storage
 
 
 class GameState:
@@ -11,17 +13,17 @@ class GameState:
 
         self.game_id = None
         self.lives = settings.MAX_ATTEMPTS
-        self.result = None  # None (em andamento), "won" ou "lost"
+        self.result = None
+        self._started = time.monotonic()
 
     def start_run(self, game_id):
-        """Começa uma partida nova: devolve as vidas e limpa o resultado."""
         self.game_id = game_id
         self.lives = settings.MAX_ATTEMPTS
         self.result = None
+        self._started = time.monotonic()
 
     @property
     def attempt(self):
-        """Número da tentativa atual (1 a MAX_ATTEMPTS)."""
         return min(settings.MAX_ATTEMPTS - self.lives + 1, settings.MAX_ATTEMPTS)
 
     @property
@@ -29,16 +31,26 @@ class GameState:
         return self.result is not None
 
     def lose_life(self):
-        """Perde uma vida e devolve a mensagem da tentativa perdida."""
         if self.game_over:
             return ""
         lost = self.messages["attempt_lost"]
         index = min(settings.MAX_ATTEMPTS - self.lives, len(lost) - 1)
         self.lives -= 1
         if self.lives <= 0:
-            self.result = "lost"
+            self._finish("lost")
         return lost[index]
 
     def win(self):
         if not self.game_over:
-            self.result = "won"
+            self._finish("won")
+
+    def _finish(self, result):
+        self.result = result
+        run = {
+            "timestamp": datetime.now().isoformat(timespec="seconds"),
+            "game_id": self.game_id,
+            "result": result,
+            "lives_left": max(self.lives, 0),
+            "duration": round(time.monotonic() - self._started, 1),
+        }
+        storage.save_run(run)

@@ -6,6 +6,7 @@ from src.core.screen_manager import ScreenManager
 from src.screens.test_screens import TestScreen
 from src.core.assets import Assets
 from src.screens.ui_test import UITestScreen
+from src.core.game_state import GameState
 
 
 def main():
@@ -22,10 +23,12 @@ def main():
 
     inputs = InputManager()
     assets = Assets()
-    manager = ScreenManager(inputs, assets)
+    state = GameState()
+    manager = ScreenManager(inputs, assets, state)
     manager.register("a", TestScreen(manager, (30, 60, 120), "Tela A - Enter para ir à B", "b"))
     manager.register("b", TestScreen(manager, (100, 40, 60), "Tela B - Enter para ir à A", "a"))
     manager.register("ui", UITestScreen(manager))
+    manager.home_screen = "a"
     manager.go_to("ui")
 
     clock = pygame.time.Clock()
@@ -42,6 +45,8 @@ def main():
 
         if inputs.pressed("quit"):
             manager.quit()
+
+        manager.check_idle()
 
         manager.update(dt)
         manager.draw(screen)

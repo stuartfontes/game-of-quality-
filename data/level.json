@@ -1,0 +1,8 @@
+{
+  "parkour_seconds": 15,
+  "correct_sequence": [
+    "down", "straight", "up", "down", "down", "straight", "up", "down", "up"
+  ],
+  "placeholder_correct": "CORRETO",
+  "placeholder_wrong": "ERRADO"
+}

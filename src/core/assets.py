@@ -4,7 +4,6 @@ from src.core import settings
 
 
 class _SilentSound:
-    """Substituto de som: aceita as mesmas chamadas e não faz nada."""
 
     def play(self, *args, **kwargs):
         pass

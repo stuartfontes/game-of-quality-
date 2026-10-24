@@ -4,7 +4,7 @@ from src.core import settings
 
 
 def wrap_text(text, font, max_width):
-    """Quebra o texto em linhas que cabem em max_width pixels."""
+
     lines = []
     for paragraph in text.split("\n"):
         current = ""
@@ -21,7 +21,7 @@ def wrap_text(text, font, max_width):
 
 
 def draw_text(surface, text, font, color, pos, max_width=None, line_spacing=2):
-    """Desenha texto (com quebra, se max_width for dado). Devolve a altura usada."""
+    
     lines = wrap_text(text, font, max_width) if max_width else text.split("\n")
     x, y = pos
     step = font.get_linesize() + line_spacing
@@ -91,7 +91,6 @@ class Menu:
         self.index = 0
 
     def update(self, inputs):
-        """Devolve o índice escolhido ao confirmar; senão, None."""
         if inputs.pressed("up"):
             self.index = (self.index - 1) % len(self.items)
         if inputs.pressed("down"):
