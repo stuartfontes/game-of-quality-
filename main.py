@@ -6,7 +6,9 @@ from src.core.game_state import GameState
 from src.core.input_manager import InputManager
 from src.core.screen_manager import ScreenManager
 from src.screens.hub import HubScreen
+from src.screens.instructions import InstructionsScreen
 from src.screens.placeholder import PlaceholderGameScreen
+from src.screens.recipe import RecipeScreen
 
 
 def main():
@@ -31,10 +33,11 @@ def main():
         "plataforma",
         PlaceholderGameScreen(manager, "plataforma", "Caminho da Qualidade"),
     )
-    manager.register(
-        "receita",
-        PlaceholderGameScreen(manager, "receita", "Monte o Processo"),
-    )
+    manager.register("receita", RecipeScreen(manager))
+    for game_id in ("plataforma", "receita"):
+        manager.register(
+            "instrucoes_" + game_id, InstructionsScreen(manager, game_id)
+        )
     manager.home_screen = "hub"
     manager.go_to("hub")
 

@@ -1,0 +1,21 @@
+{
+  "plataforma": {
+    "title": "Caminho da Qualidade",
+    "lines": [
+      "Corra e pule pelas plataformas.",
+      "Nas bifurcações, escolha seguir por cima, reto ou por baixo.",
+      "Cada caminho leva a um baú. Só os baús certos têm os ingredientes corretos.",
+      "Você tem 3 tentativas."
+    ],
+    "controls": "SETAS mover   ESPAÇO pular   E abrir"
+  },
+  "receita": {
+    "title": "Monte o Processo",
+    "lines": [
+      "Escolha a próxima etapa do processo, na ordem correta.",
+      "Se escolher uma etapa fora de hora, você perde uma tentativa.",
+      "Você tem 3 tentativas."
+    ],
+    "controls": "SETAS escolher   ENTER confirmar"
+  }
+}

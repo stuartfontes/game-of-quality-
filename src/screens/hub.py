@@ -41,7 +41,7 @@ class HubScreen(Screen):
         if inputs.pressed("right"):
             self.index = (self.index + 1) % len(self.games)
         if inputs.pressed("confirm"):
-            self.manager.go_to(self.games[self.index]["id"])
+            self.manager.go_to("instrucoes_" + self.games[self.index]["id"])
 
     def draw(self, surface):
         surface.fill(settings.COLOR_BG)

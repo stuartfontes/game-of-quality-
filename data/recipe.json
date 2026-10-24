@@ -1,0 +1,33 @@
+{
+  "title": "Monte o Processo",
+  "steps": [
+    {
+      "name": "Conferir a ordem",
+      "error": "Sem conferir a ordem de manipulação, não se sabe o que produzir."
+    },
+    {
+      "name": "Higienizar a bancada",
+      "error": "É preciso limpar a área antes de manipular qualquer material."
+    },
+    {
+      "name": "Pesar as matérias-primas",
+      "error": "A pesagem só acontece com a ordem conferida e a área limpa."
+    },
+    {
+      "name": "Misturar os componentes",
+      "error": "Os componentes precisam estar pesados antes da mistura."
+    },
+    {
+      "name": "Envasar o produto",
+      "error": "O envase só vem depois da mistura pronta."
+    },
+    {
+      "name": "Rotular o lote",
+      "error": "A identificação do lote vem depois do envase."
+    },
+    {
+      "name": "Liberar pela qualidade",
+      "error": "A liberação é a última etapa, depois de tudo conferido."
+    }
+  ]
+}
