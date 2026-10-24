@@ -30,6 +30,9 @@ def draw_text(surface, text, font, color, pos, max_width=None, line_spacing=2):
         y += step
     return y - pos[1]
 
+def draw_text_centered(surface, text, font, color, center_x, y):
+    label = font.render(text, False, color)
+    surface.blit(label, (center_x - label.get_width() // 2, y))
 
 class MessageBox:
     def __init__(self, rect, font, title=None, padding=8):

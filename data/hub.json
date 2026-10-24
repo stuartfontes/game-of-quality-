@@ -1,0 +1,17 @@
+{
+  "title": "Jogos da Qualidade",
+  "subtitle": "Escolha um jogo",
+  "hint": "SETAS escolher    ENTER confirmar",
+  "games": [
+    {
+      "id": "plataforma",
+      "title": "Caminho da Qualidade",
+      "description": "Escolha os caminhos certos e abra os baús corretos"
+    },
+    {
+      "id": "receita",
+      "title": "Monte o Processo",
+      "description": "Coloque as etapas da manipulação na ordem correta"
+    }
+  ]
+}
