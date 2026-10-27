@@ -1,0 +1,16 @@
+{
+  "phases": [
+    {
+      "name": "Fase 1",
+      "group": "f1",
+      "forks": 4,
+      "intro": "Corra, pule e escolha os baús"
+    },
+    {
+      "name": "Fase 2",
+      "group": "f2",
+      "forks": 5,
+      "intro": "Plataformas que se movem e que se desmancham"
+    }
+  ]
+}

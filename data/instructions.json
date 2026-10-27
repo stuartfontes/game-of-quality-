@@ -2,12 +2,12 @@
   "plataforma": {
     "title": "Caminho da Qualidade",
     "lines": [
-      "Corra e pule pelas plataformas.",
-      "Nas bifurcações, escolha seguir por cima, reto ou por baixo.",
-      "Cada caminho leva a um baú. Só os baús certos têm os ingredientes corretos.",
+      "Corra com as SETAS, pule com ESPAÇO e use SHIFT para um impulso (dash).",
+      "Pise nos inimigos para derrotá-los. O voador não pode ser pisado: desvie ou use o dash.",
+      "Nas bifurcações, escolha um baú e abra com E. Só os baús certos têm os ingredientes corretos.",
       "Você tem 3 tentativas."
     ],
-    "controls": "SETAS mover   ESPAÇO pular   E abrir"
+    "controls": "ESPAÇO pular   SHIFT dash   E abrir baú"
   },
   "receita": {
     "title": "Monte o Processo",

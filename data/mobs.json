@@ -1,0 +1,32 @@
+{
+  "caminhante": {
+    "width": 16,
+    "height": 16,
+    "speed": 40,
+    "hp": 1,
+    "stompable": true,
+    "flying": false,
+    "weight": 4,
+    "color": [210, 90, 60]
+  },
+  "pesado": {
+    "width": 20,
+    "height": 21,
+    "speed": 25,
+    "hp": 3,
+    "stompable": true,
+    "flying": false,
+    "weight": 2,
+    "color": [170, 90, 210]
+  },
+  "voador": {
+    "width": 16,
+    "height": 12,
+    "speed": 75,
+    "hp": 1,
+    "stompable": false,
+    "flying": true,
+    "weight": 3,
+    "color": [70, 200, 220]
+  }
+}

@@ -7,9 +7,9 @@ from src.core.input_manager import InputManager
 from src.core.screen_manager import ScreenManager
 from src.screens.hub import HubScreen
 from src.screens.instructions import InstructionsScreen
-from src.screens.placeholder import PlaceholderGameScreen
+from src.screens.platform import PlatformScreen
 from src.screens.recipe import RecipeScreen
-
+from src.screens.flight import FlightScreen
 
 def main():
     pygame.init()
@@ -29,11 +29,9 @@ def main():
     manager = ScreenManager(inputs, assets, state)
 
     manager.register("hub", HubScreen(manager))
-    manager.register(
-        "plataforma",
-        PlaceholderGameScreen(manager, "plataforma", "Caminho da Qualidade"),
-    )
+    manager.register("plataforma", PlatformScreen(manager))
     manager.register("receita", RecipeScreen(manager))
+    manager.register("voo", FlightScreen(manager))
     for game_id in ("plataforma", "receita"):
         manager.register(
             "instrucoes_" + game_id, InstructionsScreen(manager, game_id)

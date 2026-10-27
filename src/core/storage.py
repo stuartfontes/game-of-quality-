@@ -31,5 +31,5 @@ def top_runs(game_id, limit=5):
         r for r in load_runs()
         if r.get("game_id") == game_id and r.get("result") == "won"
     ]
-    wins.sort(key=lambda r: (-r.get("lives_left", 0), r.get("duration", 0)))
+    wins.sort(key=lambda r: (-r.get("score", 0), r.get("duration", 0)))
     return wins[:limit]

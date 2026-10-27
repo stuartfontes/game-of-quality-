@@ -110,3 +110,18 @@ class Menu:
             color = settings.COLOR_HIGHLIGHT if selected else settings.COLOR_TEXT
             prefix = "> " if selected else "  "
             surface.blit(self.font.render(prefix + item, False, color), (x, y + i * step))
+            
+def draw_lives(surface, lives, total):
+    size = 8
+    gap = 4
+    x = settings.INTERNAL_WIDTH - 8 - total * (size + gap)
+    for i in range(total):
+        rect = pygame.Rect(x + i * (size + gap), 4, size, size)
+        if i < lives:
+            pygame.draw.rect(surface, settings.COLOR_ERROR, rect)
+        else:
+            pygame.draw.rect(surface, settings.COLOR_DIM, rect, 1)
+            
+def draw_score(surface, font, state):
+    label = font.render(f"{state.score} pts", False, settings.COLOR_TEXT)
+    surface.blit(label, (settings.INTERNAL_WIDTH - 8 - label.get_width(), 16))

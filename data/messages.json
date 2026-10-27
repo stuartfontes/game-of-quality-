@@ -1,9 +1,14 @@
 {
-    "attempt_lost": [
-        "O controle em processo salvou no momento! Tome cuidado",
-        "A garantia da qualidade salvou desta vez! Redobre o cuidado",
-        "Infelizmente o produto foi para o mercado! :("
-    ],
-    "victory": "Um bom produto foi produzido, parabéns!",
-    "voucher": "Você ganhou um voucher para a roleta, aproveite!"
+  "attempt_lost": [
+    "O controle em processo salvou no momento! Tome cuidado",
+    "A garantia da qualidade salvou desta vez! Tome cuidado",
+    "Infelizmente o produto foi para o mercado! :("
+  ],
+  "victory": "Um bom produto foi produzido!",
+  "voucher": "Você ganhou um voucher para um prêmio!",
+  "chest_correct": "Baú correto! Você encontrou:",
+  "chest_wrong": "Desvio de qualidade! O baú tinha:",
+  "fork_prompt": "Escolha o caminho para onde acha que está o baú",
+  "wings": "Você ganhou asas! Bata as asas com ESPAÇO e passe pelas argolas",
+  "flight_hint": "ESPAÇO bate as asas. Passe pelas argolas!"
 }
