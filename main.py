@@ -10,6 +10,7 @@ from src.screens.instructions import InstructionsScreen
 from src.screens.platform import PlatformScreen
 from src.screens.recipe import RecipeScreen
 from src.screens.flight import FlightScreen
+from src.screens.boss import BossScreen
 
 def main():
     pygame.init()
@@ -32,6 +33,7 @@ def main():
     manager.register("plataforma", PlatformScreen(manager))
     manager.register("receita", RecipeScreen(manager))
     manager.register("voo", FlightScreen(manager))
+    manager.register("chefe", BossScreen(manager))
     for game_id in ("plataforma", "receita"):
         manager.register(
             "instrucoes_" + game_id, InstructionsScreen(manager, game_id)

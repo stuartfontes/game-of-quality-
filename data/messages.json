@@ -10,5 +10,6 @@
   "chest_wrong": "Desvio de qualidade! O baú tinha:",
   "fork_prompt": "Escolha o caminho para onde acha que está o baú",
   "wings": "Você ganhou asas! Bata as asas com ESPAÇO e passe pelas argolas",
-  "flight_hint": "ESPAÇO bate as asas. Passe pelas argolas!"
+  "flight_hint": "ESPAÇO bate as asas. Passe pelas argolas!",
+  "boss_hint": "Pegue as pedras no chão e jogue no chefe com E. Desvie dos barris!"
 }

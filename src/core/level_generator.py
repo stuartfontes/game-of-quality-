@@ -2,8 +2,9 @@ import random
 
 import pygame
 
+from src.core.chains import Chain
 from src.core import settings
-from src.core.chests import Barrier, Chest
+from src.core.chests import Barrier, Chest, Portal
 from src.core.mobs import Mob, load_mob_kinds
 from src.core.platforms import CrumblePlatform, MovingPlatform
 
@@ -17,6 +18,8 @@ class Chunk:
         self.cols = len(rows[0])
         self.markers = []
         self.barriers = []
+        self.portals = []
+        self.chains = []
         self.platform_specs = []
         for r, row in enumerate(rows):
             for c, char in enumerate(row):
@@ -24,6 +27,10 @@ class Chunk:
                     self.markers.append((r, c, settings.CHEST_MARKERS[char]))
                 elif char == settings.BARRIER_CHAR:
                     self.barriers.append((r, c))
+                elif char == settings.PORTAL_CHAR:
+                    self.portals.append((r, c))
+                elif char in settings.CHAIN_CHARS:
+                    self.chains.append((r, c, settings.CHAIN_CHARS[char]))
             c = 0
             while c < len(row):
                 char = row[c]
@@ -70,6 +77,7 @@ class PlacedChunk:
         self.tiles = tiles
         self.fork_id = None
         self.resolved = False
+        self.orient = False
 
 
 def load_chunks(filename):
@@ -118,6 +126,8 @@ class LevelGenerator:
         self.intro = intros[0]
         forks = [c for c in self.library if c.name == settings.FORK_CHUNK]
         self.fork_chunk = forks[0] if forks else None
+        portals = [c for c in self.library if c.name == settings.PORTAL_CHUNK]
+        self.portal_chunk = portals[0] if portals else None
         self.group = "f1"
         self.pool = []
         self.queue = []
@@ -126,11 +136,15 @@ class LevelGenerator:
         self.chests = []
         self.barriers = []
         self.platforms = []
+        self.portals = []
+        self.chains = []
         self.width = 0
         self.last = None
         self.fork_requested = False
         self.pending_forks = 0
         self.fork_counter = 0
+        self.portal_requests = 0
+        self.orient_ahead = False
         self.reset()
 
     @property
@@ -157,21 +171,25 @@ class LevelGenerator:
         self.chests = []
         self.barriers = []
         self.platforms = []
+        self.portals = []
+        self.chains = []
         self.width = 0
         self.last = None
         self.fork_requested = False
         self.pending_forks = 0
         self.fork_counter = 0
+        self.portal_requests = 0
+        self.orient_ahead = False
         self._append(self.intro, spawn_mobs=False)
-
-    def set_group(self, group):
-        self.group = group
-        self._rebuild_pool()
-        self.queue.append(self.intro)
 
     def request_fork(self):
         if self.fork_chunk is not None and not self.fork_busy:
             self.fork_requested = True
+            self.portal_requests = 0
+
+    def request_portal(self):
+        if self.portal_chunk is not None:
+            self.portal_requests += 1
 
     def resolve_fork(self, fork_id, opened):
         for chest in self.chests:
@@ -196,6 +214,7 @@ class LevelGenerator:
         start = self.width
         end = start + chunk.cols * size
         placed = PlacedChunk(chunk.name, start, end, chunk.build(start))
+        placed.orient = self.orient_ahead
         self.chunks.append(placed)
         self.width = end
         self.last = chunk
@@ -208,6 +227,18 @@ class LevelGenerator:
                 self.platforms.append(MovingPlatform(x, y, width))
             else:
                 self.platforms.append(CrumblePlatform(x, y, width))
+                
+        for row, col, length in chunk.chains:
+            anchor_x = start + col * size + size // 2
+            anchor_y = row * size + size // 2
+            self.chains.append(Chain(anchor_x, anchor_y, length))
+
+        for row, col in chunk.portals[:1]:
+            rect = pygame.Rect(
+                start + col * size, -400, size, settings.INTERNAL_HEIGHT + 800
+            )
+            self.portals.append(Portal(rect))
+            self.orient_ahead = not self.orient_ahead
 
         if chunk.markers:
             fork_id = self.fork_counter
@@ -227,7 +258,7 @@ class LevelGenerator:
                 else:
                     rect = pygame.Rect(x, row * size, size, size)
                 self.barriers.append(Barrier(rect, fork_id))
-        elif spawn_mobs:
+        elif spawn_mobs and not chunk.portals:
             self._spawn_mobs(chunk, start)
 
     def _spawn_mobs(self, chunk, start):
@@ -249,8 +280,13 @@ class LevelGenerator:
 
     def _pick(self):
         if self.fork_requested and self.fork_chunk is not None:
+            if self.orient_ahead and self.portal_chunk is not None:
+                return self.portal_chunk
             self.fork_requested = False
             return self.fork_chunk
+        if self.portal_requests > 0 and self.portal_chunk is not None:
+            self.portal_requests -= 1
+            return self.portal_chunk
         if self.queue:
             return self.queue.pop(0)
         options = [c for c in self.pool if c is not self.last] or self.pool
@@ -280,6 +316,12 @@ class LevelGenerator:
         return [
             p for p in self.platforms
             if p.rect.right >= x_left and p.rect.left <= x_right
+        ]
+
+    def chains_near(self, x_left, x_right):
+        return [
+            chain for chain in self.chains
+            if x_left <= chain.anchor_x <= x_right
         ]
 
     def update_platforms(self, dt, player, camera_x):

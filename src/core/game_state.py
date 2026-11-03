@@ -17,6 +17,8 @@ class GameState:
         self.kills = 0
         self.rings = 0
         self.play_time = 0.0
+        self.phase_index = 0
+        self.resume = False
         self._started = time.monotonic()
 
     def start_run(self, game_id):
@@ -26,6 +28,8 @@ class GameState:
         self.kills = 0
         self.rings = 0
         self.play_time = 0.0
+        self.phase_index = 0
+        self.resume = False
         self._started = time.monotonic()
 
     @property

@@ -2,15 +2,69 @@
   "phases": [
     {
       "name": "Fase 1",
+      "kind": "platformer",
       "group": "f1",
-      "forks": 4,
+      "duration": 30,
+      "portals": [],
       "intro": "Corra, pule e escolha os baús"
     },
     {
       "name": "Fase 2",
+      "kind": "platformer",
       "group": "f2",
-      "forks": 5,
-      "intro": "Plataformas que se movem e que se desmancham"
+      "duration": 30,
+      "portals": [],
+      "intro": "Plataformas que se movem e se desmancham"
+    },
+    {
+      "name": "Fase 3",
+      "kind": "flight",
+      "rings": 10,
+      "intro": "Você ganhou asas! ESPAÇO bate as asas: passe pelas argolas e atravesse o baú escolhido"
+    },
+    {
+      "name": "Fase 4",
+      "kind": "platformer",
+      "group": "f2",
+      "duration": 40,
+      "portals": [0.0, 0.8],
+      "intro": "O mundo virou de cabeça para baixo"
+    },
+    {
+      "name": "Fase 5",
+      "kind": "platformer",
+      "group": "f1",
+      "duration": 45,
+      "portals": [0.4, 0.78],
+      "intro": "O mundo vira no meio do caminho"
+    },
+    {
+      "name": "Fase 6",
+      "kind": "platformer",
+      "group": "f2",
+      "duration": 45,
+      "portals": [0.4, 0.78],
+      "intro": "Vira de novo, agora com plataformas"
+    },
+    {
+      "name": "Fase 7",
+      "kind": "platformer",
+      "group": "f7",
+      "duration": 45,
+      "portals": [],
+      "free_camera": true,
+      "intro": "Correntes! SETAS balançam e ESPAÇO solta para a próxima"
+    },
+    {
+      "name": "Fase 8",
+      "kind": "flight",
+      "rings": 10,
+      "intro": "Fase 8 (provisória): voo"
+    },
+    {
+      "name": "Fase 9",
+      "kind": "boss",
+      "intro": "Chefe final! Pegue pedras no chão e jogue com E no chefe lá em cima"
     }
   ]
 }

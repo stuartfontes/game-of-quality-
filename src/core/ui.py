@@ -74,7 +74,6 @@ class MessageBox:
 
         draw_text(surface, self.text, self.font, settings.COLOR_TEXT, (x, y), max_w)
 
-        # setinha piscando no canto inferior direito
         if int(self._time * 2) % 2 == 0:
             ax = self.rect.right - self.padding - 6
             ay = self.rect.bottom - self.padding - 4
@@ -125,3 +124,21 @@ def draw_lives(surface, lives, total):
 def draw_score(surface, font, state):
     label = font.render(f"{state.score} pts", False, settings.COLOR_TEXT)
     surface.blit(label, (settings.INTERNAL_WIDTH - 8 - label.get_width(), 16))
+    
+def draw_alert(surface, mark_font, text_font, text):
+    center_x = settings.INTERNAL_WIDTH // 2
+
+    mark = mark_font.render("!", False, settings.COLOR_HIGHLIGHT).convert_alpha()
+    mark.set_alpha(settings.PROMPT_ALPHA)
+    surface.blit(mark, (center_x - mark.get_width() // 2, settings.PROMPT_MARK_Y))
+
+    lines = wrap_text(text, text_font, settings.INTERNAL_WIDTH - 24)
+    line_h = text_font.get_linesize()
+    y = settings.INTERNAL_HEIGHT - settings.PROMPT_BOTTOM_MARGIN - line_h * len(lines)
+    for line in lines:
+        shadow = text_font.render(line, False, settings.COLOR_BG)
+        label = text_font.render(line, False, settings.COLOR_HIGHLIGHT)
+        x = center_x - label.get_width() // 2
+        surface.blit(shadow, (x + 1, y + 1))
+        surface.blit(label, (x, y))
+        y += line_h

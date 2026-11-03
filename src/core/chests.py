@@ -19,3 +19,9 @@ class Barrier:
         self.rect = rect
         self.fork_id = fork_id
         self.open = False
+
+
+class Portal:
+    def __init__(self, rect):
+        self.rect = rect
+        self.used = False
